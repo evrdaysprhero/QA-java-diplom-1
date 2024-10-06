@@ -68,19 +68,19 @@ public class BurgerTest {
 
     @Test
     public void removeIngredientSuccess() {
-        float bunPrice = 1;
-        float ingredientPrice = 3.1F;
+        String bunName = "Белая булочка";
+        String receiptExpected = String.format("(==== %s ====)%n", bunName) +
+                String.format("(==== %s ====)%n", bunName) +
+                String.format("%nPrice: %f%n", 0F);
 
-        Mockito.when(bun.getPrice()).thenReturn(bunPrice);
-        Mockito.when(ingredient.getPrice()).thenReturn(ingredientPrice);
+        Mockito.when(bun.getName()).thenReturn(bunName);
 
         Burger burger = new Burger();
         burger.setBuns(bun);
         burger.addIngredient(ingredient);
         burger.removeIngredient(0);
 
-        float price = burger.getPrice();
-        Assert.assertEquals("Ингридиент не убран", bunPrice*2, price, 0);
+        Assert.assertEquals("Ингридиент не убран", receiptExpected, burger.getReceipt());
     }
 
     @Test
@@ -164,6 +164,7 @@ public class BurgerTest {
 
         Mockito.when(bun.getPrice()).thenReturn(bunPrice);
         Mockito.when(ingredient.getPrice()).thenReturn(ingredientPrice);
+        Mockito.when(ingredientTwo.getPrice()).thenReturn(ingredientTwoPrice);
 
         Burger burger = new Burger();
         burger.setBuns(bun);

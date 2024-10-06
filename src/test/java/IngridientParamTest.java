@@ -5,9 +5,6 @@ import org.junit.runners.Parameterized;
 import praktikum.Ingredient;
 import praktikum.IngredientType;
 
-import static praktikum.IngredientType.FILLING;
-import static praktikum.IngredientType.SAUCE;
-
 @RunWith(Parameterized.class)
 public class IngridientParamTest {
 
@@ -24,9 +21,8 @@ public class IngridientParamTest {
     @Parameterized.Parameters
     public static Object[][] getIngridientData() {
         return new Object[][] {
-                { SAUCE, "Ранч", 1.2 },
-                { FILLING, "Сыр", 2.55 },
-
+                { IngredientType.SAUCE, "Ранч", 1.2F },
+                { IngredientType.FILLING, "Сыр", 2.55F },
         };
     }
 
