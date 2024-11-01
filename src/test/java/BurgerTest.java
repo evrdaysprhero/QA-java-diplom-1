@@ -14,6 +14,8 @@ import static praktikum.IngredientType.SAUCE;
 @RunWith(MockitoJUnitRunner.class)
 public class BurgerTest {
 
+    private static final int DELTA = 0;
+
     @Mock
     Bun bun;
     @Mock
@@ -23,47 +25,35 @@ public class BurgerTest {
 
     @Test
     public void setBunsSuccess() {
-        float bunPrice = 1;
 
-        Mockito.when(bun.getPrice()).thenReturn(bunPrice);
         Burger burger = new Burger();
         burger.setBuns(bun);
-        float price = burger.getPrice();
 
-        Assert.assertEquals("Булки не добавлены", bunPrice*2, price, 0);
+        Assert.assertEquals("Булки не добавлены", bun, burger.getBun());
     }
 
     @Test
     public void addOneIngredientSuccess() {
-        float bunPrice = 1;
-        float ingredientPrice = 3;
 
-        Mockito.when(bun.getPrice()).thenReturn(bunPrice);
-        Mockito.when(ingredient.getPrice()).thenReturn(ingredientPrice);
         Burger burger = new Burger();
         burger.setBuns(bun);
         burger.addIngredient(ingredient);
 
-        float price = burger.getPrice();
-        Assert.assertEquals("Ингридиенты не добавлены", ingredientPrice + bunPrice*2, price, 0);
+        Assert.assertEquals("Ингридиенты не добавлены", ingredient, burger.getIngredients().get(0));
     }
 
     @Test
     public void addThreeIngredientSuccess() {
-        float bunPrice = 1;
-        float ingredientPrice = 3.1F;
-
-        Mockito.when(bun.getPrice()).thenReturn(bunPrice);
-        Mockito.when(ingredient.getPrice()).thenReturn(ingredientPrice);
 
         Burger burger = new Burger();
         burger.setBuns(bun);
         burger.addIngredient(ingredient);
-        burger.addIngredient(ingredient);
+        burger.addIngredient(ingredientTwo);
         burger.addIngredient(ingredient);
 
-        float price = burger.getPrice();
-        Assert.assertEquals("Ингридиенты не добавлены", ingredientPrice*3 + bunPrice*2, price, 0);
+        Assert.assertEquals("Ингридиенты не добавлены", ingredient, burger.getIngredients().get(0));
+        Assert.assertEquals("Ингридиенты не добавлены", ingredientTwo, burger.getIngredients().get(1));
+        Assert.assertEquals("Ингридиенты не добавлены", ingredient, burger.getIngredients().get(2));
     }
 
     @Test
@@ -152,7 +142,7 @@ public class BurgerTest {
         burger.setBuns(bun);
         burger.addIngredient(ingredient);
 
-        Assert.assertEquals("Цена не соответствует ожидаемой", priceExpected, burger.getPrice(), 0);
+        Assert.assertEquals("Цена не соответствует ожидаемой", priceExpected, burger.getPrice(), DELTA);
     }
 
     @Test
@@ -171,7 +161,7 @@ public class BurgerTest {
         burger.addIngredient(ingredient);
         burger.addIngredient(ingredientTwo);
 
-        Assert.assertEquals("Цена не соответствует ожидаемой", priceExpected, burger.getPrice(), 0);
+        Assert.assertEquals("Цена не соответствует ожидаемой", priceExpected, burger.getPrice(), DELTA);
     }
 
     @Test

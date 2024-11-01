@@ -5,7 +5,7 @@ import praktikum.IngredientType;
 public class IngredientTypeTest {
 
     @Test
-    public void getSouse() {
+    public void getSouce() {
         IngredientType type = IngredientType.SAUCE;
 
         Assert.assertEquals("Рецепт не соответствет ожидаемому",
